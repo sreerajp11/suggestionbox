@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Submit Suggestion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 30px;
+            padding: 50px;
+            border: 1px solid #ccc;
+        }
+       h2 {
+            text-align: center;
+            color: #333;
+        }
+     label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+        }
+              input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+              textarea {
+            height: 120px;
+            resize: vertical;
+            font-family: 'Georgia', serif;
+        }
+            .checkbox-label {
+            margin-top: 15px;
+            display: block;
+        }
+               button {
+            display: block;
+            margin: 20px auto 0 auto;
+            width: 70%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .success-msg {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
+        a {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .private-info-box {
+            width: 99%;
+            background-color: #e6f7ff;
+            color: #004085;
+            border: 1px solid #b8daff;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        .tip-box {
+            width: 99%;
+            background-color: #e9f7fe;
+            color: #084298;
+            border: 1px solid #b6e0fe;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+<h2>Suggestion Box</h2>
+
+<form th:action="@{submit}" th:object="${suggestion}" method="post">
+    <label>Title:</label><br>
+    <input type="text" th:field="*{title}" required><br><br>
+
+    <label for="description" style="display: block; font-weight: bold; margin-bottom: 4px;">
+        Description
+    </label>
+
+    <div class="tip-box">
+        💡Since your suggestion is anonymous, please be as clear and detailed as possible — HR won’t be able to follow up with you for clarification.
+    </div>
+    <textarea id="description" name="description" rows="4" required style="width: 100%; padding: 8px; font-size: 14px; border-radius: 4px; border: 1px solid #ccc;"></textarea>
+
+    <label class="checkbox-label" title="Enable this if you want only HR to see it">
+        <input type="checkbox" name="makePrivate"> Make your suggestion private
+    </label>
+    <div class="private-info-box">
+        <p>
+            <strong>Note:</strong> If you enable the above option, your suggestion will only be visible to HR, no one else can see it.
+            However, <strong>HR will not be able to respond</strong> to your private suggestions.
+            <br><br>
+            Please keep it <strong>public</strong> if you're expecting a reply or want your suggestion to be visible to everyone.
+        </p>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<p class="success-msg" th:if="${success}" th:text="${success}"></p>
+
+<p><a th:href="@{/public}">View Public Suggestions</a></p>
+</body>
+</html>
