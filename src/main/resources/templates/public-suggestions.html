@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Public Suggestions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f8fb;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .suggestion-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .desc {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .comment {
+            margin-top: 12px;
+            background-color: #eef6ff;
+            padding: 10px 15px;
+            border-left: 4px solid #007bff;
+            border-radius: 6px;
+            color: #333;
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 8px;
+            margin: 0 10px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text="'Public ' + ${department} + ' Suggestions'">Public Suggestions</h2>
+
+    <div th:each="s : ${suggestions}" class="suggestion-card">
+        <div class="title" th:text="${s.title}">Title</div>
+        <div class="desc" th:text="${s.description}">Description</div>
+
+        <div class="comment"
+             th:if="${s.adminComment != null}"
+             th:text="${'Comment: ' + s.adminComment}">
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <a th:href="@{${department != null} ? '/submit/' + ${department.toLowerCase()} : '/'}">
+            ← Back to submit suggestion
+        </a>
+        <a th:href="@{/}">🏠 Go to Home</a>
+    </div>
+</div>
+
+</body>
+</html>

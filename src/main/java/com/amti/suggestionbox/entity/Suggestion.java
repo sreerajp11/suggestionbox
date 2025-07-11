@@ -14,11 +14,21 @@ public class Suggestion {
     private Long id;
     private String title;
     private String description;
-    private boolean isPublic = true;
-    private LocalDateTime submittedAt = LocalDateTime.now();
 
+    private boolean isPublic = true;
+
+    private LocalDateTime submittedAt = LocalDateTime.now();
     @Column(length = 800)
-    private String hrComment;
+    private String adminComment;
 
     private String department;
+
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
 }

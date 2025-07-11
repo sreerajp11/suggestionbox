@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome - Suggestion Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f8fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .option-button {
+            width: 240px;
+            display: inline-block;
+            margin: 12px;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .company-name {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>THE SUGGESTION BOX</h1>
+    <h2 class="company-name">AMTI SOFTWARE</h2>
+
+    <a class="option-button" th:href="@{/submit/hr}">HR Related</a>
+    <a class="option-button" th:href="@{/submit/software}">Software Related</a>
+
+    <div class="footer-note">
+        Your suggestion will be submitted anonymously. You can choose to keep it public or private(visible only to HR/Manager).
+    </div>
+</div>
+
+</body>
+</html>
+

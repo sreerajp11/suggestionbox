@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Suggestions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        .alert {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 20px;
+            border-left: 6px solid #28a745;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left-color: #dc3545;
+        }
+
+        .suggestion-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .desc {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            min-height: 60px;
+            border-radius: 6px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .reply-form button {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        textarea::placeholder {
+            font-family: 'Courier New', monospace;
+            color: #888;
+            font-size: 0.75rem;
+        }
+        .reply-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .existing-comment {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-left: 4px solid #007bff;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 6px;
+        }
+
+        .back-link a:hover {
+            background-color: #5a6269;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Admin Suggestions</h2>
+
+    <div th:if="${success}" class="alert" th:text="${success}"></div>
+    <div th:if="${error}" class="alert error" th:text="${error}"></div>
+
+    <div th:each="s : ${suggestions}" class="suggestion-card">
+        <div class="title" th:text="${s.title}">Title</div>
+        <div class="desc" th:text="${s.description}">Description</div>
+
+        <div th:if="${s.adminComment}" class="existing-comment" th:text="'Comment: ' + ${s.adminComment}">Reply shown here</div>
+
+        <form class="reply-form"
+              th:if="${s.adminComment == null}"
+              th:action="@{|/admin/reply/${#strings.toLowerCase(s.department)}/${s.id}|}"
+              method="post">
+            <label th:for="'adminComment-' + ${s.id}">Comment:</label><br>
+            <textarea th:id="'adminComment-' + ${s.id}" name="adminComment" placeholder="Write your reply here if any. You can't edit once submitted!"></textarea><br>
+            <button type="submit">Submit Reply</button>
+        </form>
+    </div>
+
+    <div class="back-link">
+        <a th:href="@{/}">🏠 Go to Home</a>
+    </div>
+</div>
+</body>
+</html>

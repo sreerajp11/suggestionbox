@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SuggestionRepository extends JpaRepository<Suggestion, Long> {
-    List<Suggestion> findByIsPublicTrue();
+
+    List<Suggestion> findByDepartmentAndIsPublicTrue(String department);
+
     List<Suggestion> findByDepartment(String department);
 }
